@@ -1,7 +1,8 @@
-FROM ghcr.io/pacroy/azure-cli:latest
-
-# Install dig
-RUN apk add --no-cache bind-tools
+FROM mcr.microsoft.com/azure-cli
+# Install tools
+RUN apk update \
+ && apk add --no-cache curl bind-tools \
+ && rm -rf /var/cache/apk/*
 
 WORKDIR /work
 COPY entrypoint.sh /work/
